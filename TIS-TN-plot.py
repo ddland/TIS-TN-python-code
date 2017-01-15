@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 def to_precision(x,p):
     """
     returns a string representation of x formatted with a precision of p
