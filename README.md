@@ -2,7 +2,7 @@
 
 Hier staan python scripts en modules die kunnen helpen gedurende de studie TN bij de Haagse Hogeschool.
 
-## TIS-TN-plot.py
+## TISTNplot.py
 
 Script om significante cijfers en gebruik van machten volgens het document Labjournaal, Meetrapport en Verslag weer te geven. \\
 Punten zijn vervangen door komma's en X- en Y-as zijn afzonderlijk van precisie te voorzien.
