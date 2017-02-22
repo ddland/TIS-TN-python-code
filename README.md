@@ -9,8 +9,10 @@ Punten zijn vervangen door komma's en X- en Y-as zijn afzonderlijk van precisie 
 
 ### Gebruik
 import matplotlib.pyplot as plt
-import TIS-TN-plot as hhs
+import TISTNplot as hhs
 hhs.PRECISION_Y = 3 # zet y-as op 3 cijfes significant (standaard = 2)
 
-fix_axis(plt.gca()) # zet de assen juist neer
+plt.plot(range(10), range(10))
+hhs.fix_axis(plt.gca()) # zet de assen juist neer
 plt.tight_layout() # zet de figuur margins goed
+plt.show()
