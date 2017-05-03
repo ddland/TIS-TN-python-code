@@ -11,7 +11,7 @@ def to_precision(x,p):
 
     if x == 0.:
         if (p-1) > 0:
-            return '$0,\!' + '0'*(p-1) +'$'
+            return '$0,' + '0'*(p-1) +'$'
         else:
             return '$0$'
     out = []
@@ -41,7 +41,7 @@ def to_precision(x,p):
     if e < -2 or e >= p:
         out.append(m[0])
         if p > 1:
-            out.append(",\!")
+            out.append(",")
             out.extend(m[1:p])
         out.append('\cdot 10^{')
         out.append(str(e))
@@ -51,7 +51,7 @@ def to_precision(x,p):
     elif e >= 0:
         out.append(m[:e+1])
         if e+1 < len(m):
-            out.append(",\!")
+            out.append(",")
             out.extend(m[e+1:])
     else:
         out.append("0,")
