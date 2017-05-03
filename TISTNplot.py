@@ -75,6 +75,12 @@ def fix_axis(ax):
 	ax.yaxis.set_major_formatter(FuncFormatter(formattery))
 	ax.xaxis.set_major_formatter(FuncFormatter(FuncFormatter(formatterx)))
 
+def label_x(grootheid, eenheid, ax,haak='[]'):
+    ax.xaxis.set_label_text('$%s \, %s\mathrm{%s}%s$'%(grootheid, haak[0], eenheid, haak[1])) 
+
+def label_y(grootheid, eenheid, ax,haak='[]'):
+    ax.yaxis.set_label_text('$%s \, %s\mathrm{%s}%s$'%(grootheid, haak[0], eenheid, haak[1])) 
+
 def test_to_precision():
     numbers = [0, 0.1, 0.4, 0.232, 0.0, 1.242323, 9.999, -1343213.234]
     for number in numbers:
@@ -82,6 +88,8 @@ def test_to_precision():
         print(number, 7, to_precision(number, 7))
         print(number, 1, to_precision(number, 1))
 		
+
+
 if __name__ == '__main__':
     test_to_precision()
     
