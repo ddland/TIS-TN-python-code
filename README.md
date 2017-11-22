@@ -21,3 +21,6 @@ plt.show()
 ```
 
 De TISTNplot module heeft twee variabelen die aangepast kunnen worden om de precisie van de x- en y-as weer te geven (PRECISION_Y en PRECISION_X). Daarna kunnen, na het aanmaken van het plot-object, de asses goed gezet worden (`hhs.fix_axis(plt.gca())`). De matplotlib functie `tight_layout` verwijdert eventuele witruimte rond het figuur (of voegt het toe) en `plt.show` geeft het figuur weer. 
+
+## Fourier
+Functies om Fouriercoefficienten analytisch uit te rekenen. De module gebruikt sympy om de integralen van willekeurige (periodieke) functies uit te voeren en geeft uiteindelijk de reeksontwikkeling of de $a_n$ en $b_n$ coefficienten terug.
