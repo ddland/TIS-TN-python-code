@@ -14,15 +14,13 @@ def Heaviside(arg):
     ''' Heaviside die ook op arg=0 gedefinieerd is '''
     return Piecewise( (0,arg<0), (1,arg>=0)) 
 
-
+# functies om de fourier-reeks coefficienten uit te rekenen
 def an(f,T,n,omega0):
     return 2/T*integrate(f*cos(n*omega0*t), (t,0,T))
 def bn(f,T,n, omega0):
     return 2/T*integrate(f*sin(n*omega0*t), (t,0,T))
 def a0(f,T,omega0):
     return 1/T*integrate(f,(t,0,T)).nsimplify() 
-def ac(f,T,n,omega0):
-    return 1/T*integrate(f*exp(-S.ImaginaryUnit*n*omega0*t), (t,-T/2, T/2)).nsimplify()
 
 def fourreeks(f,T,N):
     N += 1 # voor Maple
