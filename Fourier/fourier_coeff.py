@@ -7,8 +7,6 @@ t = Symbol('t')
 
 from sympy.functions.special.delta_functions import Piecewise
 
-from sympy.plotting import plot
-import matplotlib.pyplot as plt
 
 def Heaviside(arg):
     ''' Heaviside die ook op arg=0 gedefinieerd is '''
@@ -64,14 +62,17 @@ def plot_color(p):
 
 
 if __name__ == '__main__':
+    from sympy.plotting import plot
+    import matplotlib.pyplot as plt
+    
     f = Heaviside(t+1) - Heaviside(t-1)
     T = 4
-    N = 50
+    N = 5
     teind = 10
     som,a,b = fourreeks(f,T,N)
     mag,phase = spec(a,b,T)
     plot(som,(t,0,teind))
-    p=plot(periodiek(f,T,int(teind/T)+1),som,(t,0,teind),show=False)
+    p=plot(periodiek(f,T,int(teind/T)+1),som,(t,0,teind),adaptive=False,show=False)
     plot_color(p)
     p.show()
     phase,mag = spec(a,b,T)
