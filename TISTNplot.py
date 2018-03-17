@@ -1,95 +1,108 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-def to_precision(x,p):
-    """
-    returns a string representation of x formatted with a precision of p
-    Based on the webkit javascript implementation taken from here:
-    https://code.google.com/p/webkit-mirror/source/browse/JavaScriptCore/kjs/number_object.cpp
-    """
-    import math
-    x = float(x)
+import matplotlib.ticker as mticker
+'''
+(c) 2018, D.D.Land <d.d.land@hhs.nl>
 
-    if x == 0.:
-        if (p-1) > 0:
-            return '$0,' + '0'*(p-1) +'$'
-        else:
-            return '$0$'
-    out = []
+Module om figuren weer te geven zoals aangegeven in het Rapportage document
+van de afdeling Technische Natuurkunde van de Haagse Hogeschool.
 
-    if x < 0:
-        out.append("-")
-        x = -x
+versie: 1.1
 
-    e = int(math.log10(x))
-    tens = math.pow(10, e - p + 1)
-    n = math.floor(x/tens)
+20180317: herschreven naar class structuur om meerdere (sub)figuren hun eigen
+aantal digits op de assen te kunnen geven.
 
-    if n < math.pow(10, p - 1):
-        e = e -1
-        tens = math.pow(10, e - p+1)
-        n = math.floor(x / tens)
+'''
 
-    if abs((n + 1.) * tens - x) <= abs(n * tens -x):
-        n = n + 1
 
-    if n >= math.pow(10,p):
-        n = n / 10.
-        e = e + 1
-        
-    m = "%.*g" % (p, n)
+class TNFormatter(mticker.Formatter):
+    ''' Class om een vast aantal significante getallen weer te geven in de
+        assen van een figuur.
 
-    if e < -2 or e >= p:
-        out.append(m[0])
-        if p > 1:
-            out.append(",")
-            out.extend(m[1:p])
-        out.append('\cdot 10^{')
-        out.append(str(e))
-        out.append('}')
-    elif e == (p -1):
-        out.append(m)
-    elif e >= 0:
-        out.append(m[:e+1])
-        if e+1 < len(m):
-            out.append(",")
-            out.extend(m[e+1:])
-    else:
-        out.append("0,")
-        out.extend(["0"]*-(e+1))
-        out.append(m)
-    outstr = "".join(out)
-    return '$' + outstr + '$'
+    Class wordt aangeroepen vanuit de axis formatter van een matplotlibfiguur.
+    '''
 
-PRECISION_Y = 2 # toegang tot variabele buiten module
-def funcy(data, pos):
-    return to_precision(data,PRECISION_Y)
+    def __init__(self, length=3):
+        ''' argumenten:
+                lengte: Geeft aan hoeveel significante getallen weergegeven
+                        moeten worden.
+        '''
+        self.length = length
 
-PRECISION_X = 2 # toegang tot variabele buiten module
-def funcx(data, pos):
-    return to_precision(data,PRECISION_X)
+    def __call__(self, x, pos=None):
+        ''' Functie die vanuit matplotlib aangeroepen wordt als een figuur
+            gemaakt (of bekeken) wordt.
 
-from matplotlib.ticker import FuncFormatter
+        Herschrijft de getallen op de assen naar getallen met een vast aantal
+        digits.
+        '''
+        s = '%.10e' % x
+        tup = s.split('e')
+        signif = tup[0].rstrip('.')
+        neg = ''
+        if signif[0] == '-':
+            neg = '-'
+            signif = signif[1:]
+        sign = tup[1][0].replace('+', '')  # verwijder +
+        expo = tup[1][1:].lstrip('0')
+        if expo:  # getal groter dan 10
+            if self.length <= abs(int(expo)):  # schrijf als 10 macht
+                expon = '10^{%s%s}' % (sign, expo)
+                if self.length == 1:  # allen getal voor de . houden...
+                    splt = signif.split('.')
+                    signif = splt[0]
+                else:  # meer dan 1 cijfer significant
+                    signif = signif[:self.length+1]
+                    if len(signif) < self.length+1:
+                        signif += '0' * (self.length + 1 - len(signif))
+                s = r'%s%s{\cdot}%s' % (neg, signif, expon)
+            else:  # schrijf als getal
+                s = '%.10f' % x
+                extra0 = 0
+                if s[0] == '-':
+                    s = s[1:]
+                if s[0] == '0':  # kleiner dan 1
+                    splt = s.split('.')
+                    zeros = splt[1].lstrip('0')
+                    num = len(splt[1]) - len(zeros)
+                    print(splt, zeros)
+                    s = r'%s%s%s' % (neg, s[:self.length+2], '0'*num)
+                else:
+                    s = r'%s%s' % (neg, s[:self.length+2])
+        else:  # exponent is 0
+            if len(signif) >= self.length:
+                if self.length == 1:
+                    s = r'%s%s' % (neg, signif[:self.length])
+                else:
+                    s = r'%s%s' % (neg, signif[:self.length+1])
+            else:
+                s = r'%s%s%s' % (neg, signif, '0'*(self.length-len(signif)))
+        if s[-1] == '.':  # laatste teken een ., mag dus weg.
+            s = s[:-1]
+        print(s)
+        return "${}$".format(s.replace('.', ','))
+
+
+def label_x(grootheid, eenheid, ax, haak='[]', text=''):
+    ''' Zet label van de as op een (relatief) makkelijke manier. '''
+    ax.xaxis.set_label_text('%s$%s \, %s\mathrm{%s}%s$' % (text,
+                            grootheid, haak[0], eenheid, haak[1]))
+
+
+def label_y(grootheid, eenheid, ax, haak='[]', text=''):
+    ''' Zet label van de as op een (relatief) makkelijke manier. '''
+    ax.yaxis.set_label_text('%s$%s \, %s\mathrm{%s}%s$' % (text,
+                            grootheid, haak[0], eenheid, haak[1]))
+
+
+# nodig voor backwards compatibility
+PRECISION_X = 2
+PRECISION_Y = 2
+
+
 def fix_axis(ax):
-	formattery = FuncFormatter(funcy)
-	formatterx = FuncFormatter(funcx)
-	ax.yaxis.set_major_formatter(FuncFormatter(formattery))
-	ax.xaxis.set_major_formatter(FuncFormatter(FuncFormatter(formatterx)))
-
-def label_x(grootheid, eenheid, ax,haak='[]'):
-    ax.xaxis.set_label_text('$%s \, %s\mathrm{%s}%s$'%(grootheid, haak[0], eenheid, haak[1])) 
-
-def label_y(grootheid, eenheid, ax,haak='[]'):
-    ax.yaxis.set_label_text('$%s \, %s\mathrm{%s}%s$'%(grootheid, haak[0], eenheid, haak[1])) 
-
-def test_to_precision():
-    numbers = [0, 0.1, 0.4, 0.232, 0.0, 1.242323, 9.999, -1343213.234]
-    for number in numbers:
-        print(number, 3, to_precision(number, 3))
-        print(number, 7, to_precision(number, 7))
-        print(number, 1, to_precision(number, 1))
-		
-
-
-if __name__ == '__main__':
-    test_to_precision()
-    
+    ''' Functie die de nieuwe Class implementatie beschikbaar houdt
+        voor de oude functie definities.
+    '''
+    ax.yaxis.set_major_formatter(TNFormatter(length=PRECISION_Y))
+    ax.xaxis.set_major_formatter(TNFormatter(length=PRECISION_X))
