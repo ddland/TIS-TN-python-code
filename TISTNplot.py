@@ -65,7 +65,6 @@ class TNFormatter(mticker.Formatter):
                     splt = s.split('.')
                     zeros = splt[1].lstrip('0')
                     num = len(splt[1]) - len(zeros)
-                    print(splt, zeros)
                     s = r'%s%s%s' % (neg, s[:self.length+2], '0'*num)
                 else:
                     s = r'%s%s' % (neg, s[:self.length+2])
@@ -79,7 +78,6 @@ class TNFormatter(mticker.Formatter):
                 s = r'%s%s%s' % (neg, signif, '0'*(self.length-len(signif)))
         if s[-1] == '.':  # laatste teken een ., mag dus weg.
             s = s[:-1]
-        print(s)
         return "${}$".format(s.replace('.', ','))
 
 
