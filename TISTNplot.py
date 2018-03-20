@@ -67,7 +67,7 @@ class TNFormatter(mticker.Formatter):
                     num = len(splt[1]) - len(zeros)
                     s = r'%s%s%s' % (neg, s[:self.length+2], '0'*num)
                 else:
-                    s = r'%s%s' % (neg, s[:self.length+2])
+                    s = r'%s%s' % (neg, s[:self.length+1])
         else:  # exponent is 0
             if len(signif) >= self.length:
                 if self.length == 1:
@@ -83,13 +83,13 @@ class TNFormatter(mticker.Formatter):
 
 def label_x(grootheid, eenheid, ax, haak='[]', text=''):
     ''' Zet label van de as op een (relatief) makkelijke manier. '''
-    ax.xaxis.set_label_text('%s$%s \, %s\mathrm{%s}%s$' % (text,
+    ax.set_xlabel('%s$%s \, %s\mathrm{%s}%s$' % (text,
                             grootheid, haak[0], eenheid, haak[1]))
 
 
 def label_y(grootheid, eenheid, ax, haak='[]', text=''):
     ''' Zet label van de as op een (relatief) makkelijke manier. '''
-    ax.yaxis.set_label_text('%s$%s \, %s\mathrm{%s}%s$' % (text,
+    ax.set_ylabel('%s$%s \, %s\mathrm{%s}%s$' % (text,
                             grootheid, haak[0], eenheid, haak[1]))
 
 
