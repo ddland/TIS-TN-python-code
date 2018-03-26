@@ -78,7 +78,8 @@ class TNFormatter(mticker.Formatter):
                 s = r'%s%s%s' % (neg, signif, '0'*(self.length-len(signif)))
         if s[-1] == '.':  # laatste teken een ., mag dus weg.
             s = s[:-1]
-        return "${}$".format(s.replace('.', ','))
+        # vervang punten door komma's. Extra witruimte rond komma met {} uit string weggehaald.
+        return "${}$".format(s.replace('.', '{,}')) 
 
 
 def label_x(grootheid, eenheid, ax, haak='[]', text=''):
