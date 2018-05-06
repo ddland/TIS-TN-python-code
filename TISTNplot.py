@@ -78,18 +78,21 @@ class TNFormatter(mticker.Formatter):
                 s = r'%s%s%s' % (neg, signif, '0'*(self.length-len(signif)))
         if s[-1] == '.':  # laatste teken een ., mag dus weg.
             s = s[:-1]
-        return "${}$".format(s.replace('.', ','))
+        return "${}$".format(s.replace('.', '{,}'))
+
+    def legenda(self, x, pos=None):
+        return self.__call__(x, pos)
 
 
 def label_x(grootheid, eenheid, ax, haak='[]', text=''):
     ''' Zet label van de as op een (relatief) makkelijke manier. '''
-    ax.xaxis.set_label_text('%s$%s \, %s\mathrm{%s}%s$' % (text,
+    ax.xaxis.set_label_text('%s $\,%s \, %s\mathrm{%s}%s$' % (text,
                             grootheid, haak[0], eenheid, haak[1]))
 
 
 def label_y(grootheid, eenheid, ax, haak='[]', text=''):
     ''' Zet label van de as op een (relatief) makkelijke manier. '''
-    ax.yaxis.set_label_text('%s$%s \, %s\mathrm{%s}%s$' % (text,
+    ax.yaxis.set_label_text('%s $\,%s \, %s\mathrm{%s}%s$' % (text,
                             grootheid, haak[0], eenheid, haak[1]))
 
 
