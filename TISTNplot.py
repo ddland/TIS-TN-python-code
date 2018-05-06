@@ -67,7 +67,7 @@ class TNFormatter(mticker.Formatter):
                     num = len(splt[1]) - len(zeros)
                     s = r'%s%s%s' % (neg, s[:self.length+2], '0'*num)
                 else:
-                    s = r'%s%s' % (neg, s[:self.length+2])
+                    s = r'%s%s' % (neg, s[:self.length+1])
         else:  # exponent is 0
             if len(signif) >= self.length:
                 if self.length == 1:
@@ -78,11 +78,11 @@ class TNFormatter(mticker.Formatter):
                 s = r'%s%s%s' % (neg, signif, '0'*(self.length-len(signif)))
         if s[-1] == '.':  # laatste teken een ., mag dus weg.
             s = s[:-1]
+        # vervang punten door komma's. Extra witruimte rond komma met {} uit string weggehaald.
         return "${}$".format(s.replace('.', '{,}'))
 
     def legenda(self, x, pos=None):
         return self.__call__(x, pos)
-
 
 def label_x(grootheid, eenheid, ax, haak='[]', text=''):
     ''' Zet label van de as op een (relatief) makkelijke manier. '''
@@ -94,7 +94,6 @@ def label_y(grootheid, eenheid, ax, haak='[]', text=''):
     ''' Zet label van de as op een (relatief) makkelijke manier. '''
     ax.yaxis.set_label_text('%s $\,%s \, %s\mathrm{%s}%s$' % (text,
                             grootheid, haak[0], eenheid, haak[1]))
-
 
 # nodig voor backwards compatibility
 PRECISION_X = 2
