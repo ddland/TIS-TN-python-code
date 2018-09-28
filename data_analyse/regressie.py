@@ -15,10 +15,11 @@ def fit_func_linear(x, a, b):
 
 func = fit_func_linear
 
-# data
+#testdata binnen python data 
 #x = np.arange(10)
 #v = [7, 10, 14, 18, 22, 40, 25, 30, 33, 40]
 #v_error = [1, 1, 1, 3, 3, 1, 3, 5, 5, 5] # +/- meetfout
+
 # lees data in uit excel file:
 data = pd.read_excel("data.xlsx")
 x = data['x'].values
@@ -54,5 +55,5 @@ TN.fix_axis(plt.gca())
 plt.tight_layout()
 
 # geef figuur weer of sla het op!
-plt.savefig("test.pdf",bbox_inches='tight')
+plt.savefig("regressie.pdf",bbox_inches='tight')
 plt.show()

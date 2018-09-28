@@ -24,3 +24,6 @@ De TISTNplot module heeft twee variabelen die aangepast kunnen worden om de prec
 
 ## Fourier
 Functies om Fouriercoefficienten analytisch uit te rekenen. De module gebruikt sympy om de integralen van willekeurige (periodieke) functies uit te voeren en geeft uiteindelijk de reeksontwikkeling of de $a_n$ en $b_n$ coefficienten terug.
+
+## Data analyse
+Een voorbeeld script om vanuit een Excel dataset via panda, matplotlib en scipy een figuur te genereren met daarin een model aan de data gefit. De fouten in de afhankelijke waarden zijn meegenomen in het bepalen van de coefficienten van het model.
