@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import matplotlib.ticker as mticker
-'''
+"""
 (c) 2018, D.D.Land <d.d.land@hhs.nl>
 
 Module om figuren weer te geven zoals aangegeven in het Rapportage document
@@ -9,33 +9,48 @@ van de afdeling Technische Natuurkunde van de Haagse Hogeschool.
 
 versie: 1.1
 
+20190323: docstrings aangepast aan eisen programmeren.
 20180317: herschreven naar class structuur om meerdere (sub)figuren hun eigen
 aantal digits op de assen te kunnen geven.
-
-'''
+"""
 
 
 class TNFormatter(mticker.Formatter):
-    ''' Class om een vast aantal significante getallen weer te geven in de
-        assen van een figuur.
+    """
+    Class om een vast aantal significante getallen weer te geven in de
+    assen van een figuur.
 
     Class wordt aangeroepen vanuit de axis formatter van een matplotlibfiguur.
-    '''
+    """
 
     def __init__(self, length=3):
-        ''' argumenten:
-                lengte: Geeft aan hoeveel significante getallen weergegeven
-                        moeten worden.
-        '''
+        """
+        Initialisatie van de TNFormatter class. Het aantal significante
+        getallen (length) wordt gebruikt in andere functies om de getallen
+        juist op te maken.
+
+        argumenten:
+            lengte: Geeft aan hoeveel significante getallen weergegeven
+                    moeten worden.
+        return:
+            none
+        """
         self.length = length
 
     def __call__(self, x, pos=None):
-        ''' Functie die vanuit matplotlib aangeroepen wordt als een figuur
-            gemaakt (of bekeken) wordt.
+        """
+        Functie die vanuit matplotlib aangeroepen wordt als een figuur
+        gemaakt (of bekeken) wordt.
+
+        argumenten:
+            x: getal waarvan de opmaak aangepast moet worden
+            pos: niet gebruikt argument vanuit matplotlib.
+        return:
+            string met daarin het juist opgemaakte getal.
 
         Herschrijft de getallen op de assen naar getallen met een vast aantal
         digits.
-        '''
+        """
         s = '%.10e' % x
         tup = s.split('e')
         signif = tup[0].rstrip('.')
@@ -83,29 +98,72 @@ class TNFormatter(mticker.Formatter):
         return "${}$".format(s.replace('.', '{,}'))
 
     def legenda(self, x, pos=None):
+        """
+        Functie aangeroepen vanuit matplotlib. Functie geeft aanroep naar
+        __call__ terug.
+
+        argumenten:
+            x: getal waarvan de opmaak aangepast moet worden
+            pos: niet gebruikt argument vanuit matplotlib.
+
+        """
         return self.__call__(x, pos)
 
 
 def label_x(grootheid, eenheid, ax, haak='[]', text=''):
-    ''' Zet label van de as op een (relatief) makkelijke manier. '''
+    """
+    Zet label van de as op een (relatief) makkelijke manier.
+
+    argumenten:
+        grootheid: grootheid van de waarden op de as.
+        eenheid: eenheid van de waarden op de as.
+        ax: matplotlib ax object waarin de x-as zicht bevindt.
+        haak: standaard [], anders string met linker haak, rechter haak.
+        text: eventuele tekst die voor de grootheid weergegeven moet worden.
+    return:
+        none
+    """
     ax.xaxis.set_label_text('%s $\,%s \, %s\mathrm{%s}%s$' % (text,
                             grootheid, haak[0], eenheid, haak[1]))
 
 
 def label_y(grootheid, eenheid, ax, haak='[]', text=''):
-    ''' Zet label van de as op een (relatief) makkelijke manier. '''
+    """
+    Zet label van de as op een (relatief) makkelijke manier.
+
+    argumenten:
+        grootheid: grootheid van de waarden op de as.
+        eenheid: eenheid van de waarden op de as.
+        ax: matplotlib ax object waarin de x-as zicht bevindt.
+        haak: standaard [], anders string met linker haak, rechter haak.
+        text: eventuele tekst die voor de grootheid weergegeven moet worden.
+    return:
+        none
+    """
     ax.yaxis.set_label_text('%s $\,%s \, %s\mathrm{%s}%s$' % (text,
                             grootheid, haak[0], eenheid, haak[1]))
 
 
-# nodig voor backwards compatibility
+# Backwards compatiblity (fix_axis functie aanroep)
+
+# Variabelen die na de import door de gebruiker aangepast kunnen worden.
+# Variabelen geven het aantal significante getallen voor de x-, y-as.
+
 PRECISION_X = 2
 PRECISION_Y = 2
 
 
 def fix_axis(ax):
-    ''' Functie die de nieuwe Class implementatie beschikbaar houdt
-        voor de oude functie definities.
-    '''
+    """
+    Functie die de nieuwe Class implementatie beschikbaar houdt
+    voor de oude functie definities.
+
+    argumenten:
+        ax: matplotlib ax object
+
+    module argumenten:
+        PRECISION_X: aantal significante getallen op de x-as
+        PRECISION_Y: aantal significante getallen op de x-as
+    """
     ax.yaxis.set_major_formatter(TNFormatter(length=PRECISION_Y))
     ax.xaxis.set_major_formatter(TNFormatter(length=PRECISION_X))
