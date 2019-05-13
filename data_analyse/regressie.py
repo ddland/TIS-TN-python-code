@@ -15,6 +15,7 @@ def fit_func_linear(x, a, b):
     ''' y = a*x + b '''
     return a*x + b
 
+
 func = fit_func_linear
 
 # testdata binnen python data
