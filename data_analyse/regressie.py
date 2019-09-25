@@ -60,5 +60,6 @@ TN.fix_axis(plt.gca())
 plt.tight_layout()
 
 # geef figuur weer of sla het op!
-plt.savefig("regressie.pdf", bbox_inches='tight')
+plt.savefig("regressie.pdf", bbox_inches='tight', density=300)
+plt.savefig("regressie.png", bbox_inches='tight', density=300)
 plt.show()

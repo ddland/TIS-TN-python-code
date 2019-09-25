@@ -20,4 +20,5 @@ TN.label_y('v', 'm/s', ax, text='snelheid ')
 
 plt.grid()
 plt.tight_layout()
+plt.savefig('voorbeeld.png', density=300) # of sla op als pdf!
 plt.show()
