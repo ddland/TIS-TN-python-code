@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 import TISTNplot as TN # TISTNplot.py in huidige directory of in python path.
 
-sigma = False # neem meetfout wel (True) of niet (False) mee in de datafit
+sigma = True # neem meetfout wel (True) of niet (False) mee in de datafit
 
 # fit functies
 def fit_func_linear(x, a, b):
@@ -24,7 +24,7 @@ func = fit_func_linear
 data = pd.read_excel("data.xlsx")
 x = data['x'].values
 v = data['v'].values
-v_error = data['v_err'].values
+v_error = data['v_err'].values*3
 
 # plot data
 plt.errorbar(x, v, yerr=v_error, fmt='ok', label='meetdata', capsize=5)
@@ -39,13 +39,35 @@ else:
     p_opt, p_cov = curve_fit(func, x, v, absolute_sigma=True)
 
 fit_error = np.sqrt(np.diag(p_cov))
-
 # plot datafit
 fitlabel = 'fit: v=%5.2fx + %5.2f'%(p_opt[0], p_opt[1])
 fitlabel = fitlabel.replace('.',',') # komma's in plaats van punten als decimaal operator
 plt.plot(x, func(x, *p_opt), '-k', label=fitlabel)
-plt.plot(x, func(x, *(p_opt + 3*fit_error)), '-.k', label='$3\sigma$ onzekerheid in model')
-plt.plot(x, func(x, *(p_opt - 3*fit_error)), '-.k')
+sigma = 3
+
+ymax = func(x, *(p_opt+fit_error*sigma))
+ymin = func(x, *(p_opt-fit_error*sigma))
+ydata = func(x, *p_opt)
+
+# vul ymax/ymin in met behulp van sigma maal onzekerheid in fit parameters
+for ii in range(len(fit_error)):
+    rc = p_opt[0] + sigma*fit_error[0]
+    fit_error[0] = -fit_error[0]
+    for jj in range(len(fit_error)):
+        offset = p_opt[1] + sigma*fit_error[1]
+        fit_error[1] = -fit_error[1]
+        yerr = func(x, rc, offset)
+        maxTrue = yerr > ymax
+        minTrue = yerr < ymin
+        ymax[yerr > ymax] = yerr[yerr > ymax]
+        ymin[yerr < ymin] = yerr[yerr < ymin]
+
+# maximum error
+plt.plot(x, ymax, '-.k', label='maximale $3\sigma$ onzekerheid in model')
+plt.plot(x, ymin, '-.k')
+# just 3 sigma of error of all parameters added / substracted
+#plt.plot(x, func(x, *(p_opt-fit_error*sigma)), '--r', label='error in parameters')
+#plt.plot(x, func(x, *(p_opt+fit_error*sigma)), '--r')
 
 # plot legenda
 plt.legend(loc=0)
