@@ -67,8 +67,10 @@ for ii in range(len(fit_error)):
         ymin[yerr < ymin] = yerr[yerr < ymin]
 
 # maximum error
-plt.plot(x, ymax, '-.k', label='maximale $3\sigma$ onzekerheid in model')
-plt.plot(x, ymin, '-.k')
+plt.fill_between(x, ymin, ymax, color='gray', alpha=0.3, label='maximale $3\sigma$ onzekerheid in model')
+#plt.plot(x, ymax, '-.k', label='maximale $3\sigma$ onzekerheid in model')
+#plt.plot(x, ymin, '-.k')
+
 # just 3 sigma of error of all parameters added / substracted
 #plt.plot(x, func(x, *(p_opt-fit_error*sigma_plot)), '--r', label='error in parameters')
 #plt.plot(x, func(x, *(p_opt+fit_error*sigma_plot)), '--r')
