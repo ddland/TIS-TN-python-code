@@ -11,6 +11,9 @@ ax.xaxis.set_major_formatter(formatterX)  # gedefinieerde formatter
 
 plt.plot(range(10), range(10))  # plot 10 getallen (0-9 uitgezet tegen 0-9)
 
+TN.label_x('t', 's', ax, text='tijd')
+TN.label_y('v', 'm/s', ax, text='snelheid')
+
 plt.tight_layout()  # plaats (net) voldoende witruimte rond het figuur
 
 # maak figuur niet groter dan nodig is
