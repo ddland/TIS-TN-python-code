@@ -1,28 +1,36 @@
-# TIS-TN-python
+# TIS-TN-python-code
 
-Hier staan python scripts en modules die kunnen helpen gedurende de studie TN bij de Haagse Hogeschool.
+Hier staat de source code van de scripts die door de docenten van TN voor gebruik tijdens de studie gemaakt zijn.
 
-## TISTNplot.py
+De scripts helpen bij het plotten (standaard mooi opgemaakte figuren), regressie, fourier volgens het wiskunde boek en het uitlezen van data.
 
-Script om significante cijfers en gebruik van machten volgens het document Labjournaal, Meetrapport en Verslag weer te geven. 
-Punten zijn vervangen door komma's en X- en Y-as zijn afzonderlijk van precisie te voorzien.
+## Installatie en afhankelijkheden
 
-### Gebruik
-Een minimaal voorbeeld is hieronder gegeven:
-```python
+### Afhankelijkheden (dependencies)
+De scripts maken gebruik van (via pip worden ze automatisch meegeinstalleerd):
+* numpy
+* matplotlib
+* sympy
 
+Voor de hardware-scripts zijn meer afhankelijkheden nodig (worden niet automatisch geinstalleerd):
+* adafruit_circuitpython-ads1x15
+* sensehat
+
+### Installatie via PyPi
+Als PyPi aanwezig is kan via [PyPi](https://pypi.org/project/TN-code) de software voor de huidge gebruiker geinstalleer worden:
+```console
+pip3 install tn_code
+```
+Om system-wide (voor alle gebruikers te installeren:
+```console
+sudo pip3 install tn_code`
 ```
 
-De matplotlib formatter voor de assen wordt afzonderlijk voor de x- en y-as aangemaakt. Hierin geef je aan hoeveel significante cijfers op de assen geplaatst moeten worden.
+Als virtual environment
+```console
+mkdir project-naam && cd project-naam
+python3 -m venv .env
+source .env/bin/activate
+pip3 install tn_code
+```
 
-Als de x-as (of de y-as) uit tijd-data bestaat en je wilt bijvoorbeeld data-time labels op de assen, kan je de formatter voor die as niet aanpassen. Door bijvoorbeeld de regel 
-```python
-formatterY = TN.TNFormatter(2) # zet de y-as op 2 cijfers significant
-``` 
-weg te laten wordt alleen de x-as opgemaakt.
-
-## Fourier
-Functies om Fouriercoefficienten analytisch uit te rekenen. De module gebruikt sympy om de integralen van willekeurige (periodieke) functies uit te voeren en geeft uiteindelijk de reeksontwikkeling of de $a_n$ en $b_n$ coefficienten terug.
-
-## Data analyse
-Een voorbeeld script om vanuit een Excel dataset via panda, matplotlib en scipy een figuur te genereren met daarin een model aan de data gefit. De fouten in de afhankelijke waarden zijn meegenomen in het bepalen van de coefficienten van het model.

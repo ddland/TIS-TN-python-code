@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
-import TISTNplot as TN  # TISTNplot.py in huidige directory of in python path.
+from TN_code.plotten import TISTNplot as TN  # TISTNplot.py in huidige directory of in python path.
 
 sigma = True # neem meetfout wel (True) of niet (False) mee in de datafit
 
@@ -68,13 +68,6 @@ for ii in range(len(fit_error)):
 
 # maximum error
 plt.fill_between(x, ymin, ymax, color='gray', alpha=0.3, label='maximale $3\sigma$ onzekerheid in model')
-#plt.plot(x, ymax, '-.k', label='maximale $3\sigma$ onzekerheid in model')
-#plt.plot(x, ymin, '-.k')
-
-# just 3 sigma of error of all parameters added / substracted
-#plt.plot(x, func(x, *(p_opt-fit_error*sigma_plot)), '--r', label='error in parameters')
-#plt.plot(x, func(x, *(p_opt+fit_error*sigma_plot)), '--r')
-
 # plot legenda
 plt.legend(loc=0)
 
@@ -84,5 +77,5 @@ plt.tight_layout()
 
 # geef figuur weer of sla het op!
 plt.savefig("regressie.pdf", bbox_inches='tight', dpi=300)
-plt.savefig("regressie.png", bbox_inches='tight', dpi=300)
+#plt.savefig("regressie.png", bbox_inches='tight', dpi=300)
 plt.show()

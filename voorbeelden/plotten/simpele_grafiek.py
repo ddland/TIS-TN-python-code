@@ -2,7 +2,7 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
-import TISTNplot as TN
+from TN_code.plotten import TISTNplot as TN
 
 x = np.arange(100)
 y = 3*x + 4
