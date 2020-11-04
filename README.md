@@ -4,6 +4,8 @@ Hier staat de source code van de scripts die door de docenten van TN voor gebrui
 
 De scripts helpen bij het [plotten](TN_code/plotten/) (standaard mooi opgemaakte figuren), [regressie](voorbeelden/regressie/), [fourier](TN_code/fourier/) volgens het wiskunde boek en het [uitlezen van sensoren](TN_code/hardware).
 
+Zie verder het voorbeeld gebruik in de [voorbeelden](TN_code/voorbeelden) directorie. Deze directorie wordt niet met PyPi geinstalleerd, hiervoor kan je het git-repository gebruiken. 
+
 ## Installatie en afhankelijkheden
 
 ### Afhankelijkheden (dependencies)
@@ -16,10 +18,12 @@ Voor de hardware-scripts zijn meer afhankelijkheden nodig (worden niet automatis
 * adafruit_circuitpython-ads1x15
 * adafruit-circuitpython-mcp3xxx
 * sensehat
+
+Om voor alle gebruikers deze afhankelijkheden te installeren is de volgende code nodig:
 ```console
 sudo apt-get install sense-hat
-pip3 install adafruit_circuitpython-ads1x15 adafruit-circuitpython-mcp3xxx
-
+sudo pip3 install adafruit_circuitpython-ads1x15 adafruit-circuitpython-mcp3xxx
+```
 
 ### Installatie via PyPi
 Als PyPi aanwezig is kan via [PyPi](https://pypi.org/project/TN-code) de software voor de huidge gebruiker geinstalleer worden:
@@ -28,7 +32,7 @@ pip3 install tn_code
 ```
 Om system-wide (voor alle gebruikers te installeren:
 ```console
-sudo pip3 install tn_code`
+sudo pip3 install tn_code
 ```
 
 Als virtual environment
@@ -38,4 +42,3 @@ python3 -m venv .env
 source .env/bin/activate
 pip3 install tn_code
 ```
-
