@@ -123,7 +123,7 @@ def label_x(grootheid, eenheid, ax, haak='[]', text=''):
     return:
         none
     """
-    ax.xaxis.set_label_text('%s $\,%s \, %s\mathrm{%s}%s$' % (text,
+    ax.xaxis.set_label_text(r'%s $\,%s \, %s\mathrm{%s}%s$' % (text,
                             grootheid, haak[0], eenheid, haak[1]))
 
 
@@ -140,7 +140,7 @@ def label_y(grootheid, eenheid, ax, haak='[]', text=''):
     return:
         none
     """
-    ax.yaxis.set_label_text('%s $\,%s \, %s\mathrm{%s}%s$' % (text,
+    ax.yaxis.set_label_text(r'%s $\,%s \, %s\mathrm{%s}%s$' % (text,
                             grootheid, haak[0], eenheid, haak[1]))
 
 

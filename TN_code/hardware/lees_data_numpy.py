@@ -14,11 +14,11 @@ def readArray(filename):
 
 if __name__ == '__main__':
     # module wordt uitgevoerd
-    
     import matplotlib.pyplot as plt
+
     # data van 1 kanaal weergeven
     fn = 'meting_test1_1603898691.txt'
     data = readArray(fn)
-    time = data[:,0]
-    plt.plot(time,data[:,1])
+    time = data[:, 0]
+    plt.plot(time, data[:, 1])
     plt.show()

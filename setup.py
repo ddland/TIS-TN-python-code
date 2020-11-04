@@ -1,4 +1,4 @@
-import setuptools 
+import setuptools
 
 setuptools.setup(
     name='TN_code',
@@ -9,7 +9,7 @@ setuptools.setup(
     author='Derek Land',
     author_email='d.d.land@hhs.nl',
     packages=setuptools.find_packages(),
-    install_requires=['numpy', 
+    install_requires=['numpy',
                       'matplotlib',
                       'pandas',
                       'sympy',
@@ -18,6 +18,5 @@ setuptools.setup(
                  'Natural Language :: Dutch',
                  'Programming Language :: Python :: 3',
                  'Topic :: Utilities',
-        ],
+                 ],
 )
-
