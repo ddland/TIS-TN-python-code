@@ -1,5 +1,5 @@
 import numpy as np
-import time 
+import time
 
 from TN_code.hardware import get_data
 from TN_code.hardware import write_data

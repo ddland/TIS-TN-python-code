@@ -24,28 +24,27 @@ gain = 1
 mode = 'single'
 filename = 'test'
 
-###### configureer de ADC
+# ----- configureer de ADC
 
 ads = ADS.ADS1115(i2c)
 
-if mode=='cont':
-    ads.mode = ADS.Mode.CONTINUOUS    #snel
-elif mode== 'single':
-    ads.mode = ADS.Mode.SINGLE      #langzaam
+if mode == 'cont':
+    ads.mode = ADS.Mode.CONTINUOUS  # snel
+elif mode == 'single':
+    ads.mode = ADS.Mode.SINGLE      # langzaam
 
-###### configureer de ADC
+# ----- configureer de ADC
 
-ads.gain = gain 
+ads.gain = gain
 print(ads.gains)  # voor alle opties
-ads.data_rate = sample_rate 
+ads.data_rate = sample_rate
 print(ads.rates)  # voor alle opties
 
 chan = AnalogIn(ads, ADS.P0, ADS.P1)  # pin 0 verbonden
 
-###### Lees meerdere datapunten
-data = get_data.readADS(chan,samples)
+# ----- Lees meerdere datapunten
+data = get_data.readADS(chan, samples)
 
 # maak een (unieke) filenaam aan
-file_name = filename+'.txt'
-#filename = 'meting_test1_%s.txt' %(int(time.time()))
+file_name = filename + '.txt'
 write_data.saveArray(data, file_name)

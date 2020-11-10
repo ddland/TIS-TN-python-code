@@ -3,7 +3,7 @@ import serial
 from TN_code.hardware import get_data
 from TN_code.hardware import write_data
 
-ser = serial.Serial('/dev/ttyACM0', 9600) # arduino
+ser = serial.Serial('/dev/ttyACM0', 9600)  # arduino
 
 """
 AnalogReadSerial.ino -> 1 datapunt
@@ -11,8 +11,9 @@ AnalogReadSerial.ino -> 1 datapunt
 /*
   AnalogReadSerial
   Reads an analog input on pin 0, prints the result to the serial monitor.
-  Attach the center pin of a potentiometer to pin A0, and the outside pins to +5V and ground.
- 
+  Attach the center pin of a potentiometer to pin A0, and the outside pins
+  to +5V and ground.
+
  This example code is in the public domain.
  */
 
@@ -39,9 +40,10 @@ AnalogReadSerial.ino -> 2 datapunten
 /*
   AnalogReadSerial
   Reads an analog input on pin 0, prints the result to the serial monitor.
-  Attach the center pin of a potentiometer to pin A0, and the outside pins to +5V and ground.
- 
- This example code is in the public domain.
+  Attach the center pin of a potentiometer to pin A0, and the outside pins
+  to +5V and ground.
+
+  This example code is in the public domain.
  */
 
 String semicolumn, values2;
