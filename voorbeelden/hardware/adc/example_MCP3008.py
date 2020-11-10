@@ -15,16 +15,21 @@ except ImportError:
     raise ImportError(
         "Failed to import library from parent folder")
 
+#INPUT VARIABELEN
+filename = 'test'
+samples = 1000
+
 ###### configureer de MCP
 spi = busio.SPI(clock=board.SCK, MISO=board.MISO, MOSI=board.MOSI)
 cs = digitalio.DigitalInOut(board.D5)
 mcp = MCP.MCP3008(spi, cs)
 
-chan = AnalogIn(mcp, MCP.P0)
+chan = AnalogIn(mcp, MCP.P0, MCP.P1)
 
 ###### Lees meerdere datapunten
-data = get_data.readADS(chan)
+data = get_data.readADS(chan,samples)
 
 # maak een (unieke) filenaam aan
-filename = 'meting_test1_%s.txt' %(int(time.time()))
-write_data.saveArray(data, filename)
+file_name = filename+'.txt'
+#filename = 'meting_test1_%s.txt' %(int(time.time()))
+write_data.saveArray(data, file_name)

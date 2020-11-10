@@ -8,6 +8,7 @@ if __name__ == '__main__':
     fn = 'meting_test1_1604506938.txt'
     data = lees_data_numpy.readArray(fn)
     time = data[:, 0]
+    print(len(time)/(time[-1]-time[0]))
     plt.plot(time, data[:, 1])
     plt.show()
 

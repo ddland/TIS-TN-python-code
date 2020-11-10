@@ -17,24 +17,35 @@ except ImportError:
     raise ImportError(
         "Failed to import library from parent folder")
 
+# INPUT VARIABELEN
+samples = 1000
+sample_rate = 250
+gain = 1
+mode = 'single'
+filename = 'test'
 
 ###### configureer de ADC
 
 ads = ADS.ADS1115(i2c)
 
-ads.mode = ADS.Mode.CONTINUOUS    #snel
-# ads.mode = ADS.Mode.SINGLE      #langzaam
+if mode=='cont':
+    ads.mode = ADS.Mode.CONTINUOUS    #snel
+elif mode== 'single':
+    ads.mode = ADS.Mode.SINGLE      #langzaam
 
-ads.gain = 1 
+###### configureer de ADC
+
+ads.gain = gain 
 print(ads.gains)  # voor alle opties
-ads.rate = 860 
+ads.data_rate = sample_rate 
 print(ads.rates)  # voor alle opties
 
-chan = AnalogIn(ads, ADS.P0)  # pin 0 verbonden
+chan = AnalogIn(ads, ADS.P0, ADS.P1)  # pin 0 verbonden
 
 ###### Lees meerdere datapunten
-data = get_data.readADS(chan)
+data = get_data.readADS(chan,samples)
 
 # maak een (unieke) filenaam aan
-filename = 'meting_test1_%s.txt' %(int(time.time()))
-write_data.saveArray(data, filename)
+file_name = filename+'.txt'
+#filename = 'meting_test1_%s.txt' %(int(time.time()))
+write_data.saveArray(data, file_name)
