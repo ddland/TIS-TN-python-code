@@ -19,26 +19,26 @@ Voor de hardware-scripts zijn meer afhankelijkheden nodig (worden niet automatis
 * adafruit-circuitpython-mcp3xxx
 * sensehat
 
-Om voor alle gebruikers deze afhankelijkheden te installeren is de volgende code nodig:
+Om voor alle gebruikers deze afhankelijkheden te installeren is de volgende code nodig (Linux):
 ```console
 sudo apt-get install sense-hat
-sudo pip3 install adafruit_circuitpython-ads1x15 adafruit-circuitpython-mcp3xxx
+sudo pip install adafruit_circuitpython-ads1x15 adafruit-circuitpython-mcp3xxx
 ```
 
 ### Installatie via PyPi
 Als PyPi aanwezig is kan via [PyPi](https://pypi.org/project/TN-code) de software voor de huidge gebruiker geinstalleer worden:
 ```console
-pip3 install tn_code
+pip install tn_code
 ```
 Om system-wide (voor alle gebruikers te installeren:
 ```console
-sudo pip3 install tn_code
+sudo pip install tn_code
 ```
 
 Als virtual environment
 ```console
 mkdir project-naam && cd project-naam
-python3 -m venv .env
+python -m venv .env
 source .env/bin/activate
-pip3 install tn_code
+pip install tn_code
 ```
