@@ -6,7 +6,7 @@ README = (HERE / "README.md").read_text()
 
 setuptools.setup(
     name='TN_code',
-    version='1.00',
+    version='1.1',
     description='Code gebruikt bij de opleiding TN van de Haagse Hogeschool',
     long_description=README,
     long_description_content_type="text/markdown",
