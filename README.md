@@ -1,20 +1,20 @@
-# TIS-TN-python-code
+ # TIS-TN-python-code
 
 Hier staat de source code van de scripts die door de docenten van TN voor gebruik tijdens de studie gemaakt zijn.
 
 De scripts helpen bij het [plotten](TN_code/plotten/) (standaard mooi opgemaakte figuren), [regressie](voorbeelden/regressie/), [fourier](TN_code/fourier/) volgens het wiskunde boek en het [uitlezen van sensoren](TN_code/hardware).
 
-Zie verder het voorbeeld gebruik in de [voorbeelden](TN_code/voorbeelden) directorie. Deze directorie wordt niet met PyPi geinstalleerd, hiervoor kan je het git-repository gebruiken. 
+Zie verder het voorbeeld gebruik in de [voorbeelden](TN_code/voorbeelden) directorie. Deze directorie wordt niet met PyPi geïnstalleerd, hiervoor kan je het git-repository gebruiken. 
 
 ## Installatie en afhankelijkheden
 
 ### Afhankelijkheden (dependencies)
-De scripts maken gebruik van (via pip worden ze automatisch meegeinstalleerd):
+De scripts maken gebruik van (via pip worden ze automatisch meegeïnstalleerd):
 * numpy
 * matplotlib
 * sympy
 
-Voor de hardware-scripts zijn meer afhankelijkheden nodig (worden niet automatisch geinstalleerd):
+Voor de hardware-scripts zijn meer afhankelijkheden nodig (worden niet automatisch geïnstalleerd):
 * adafruit_circuitpython-ads1x15
 * adafruit-circuitpython-mcp3xxx
 * sensehat
@@ -34,11 +34,11 @@ sudo python3 -m pip install adafruit_circuitpython-ads1x15 adafruit-circuitpytho
 Door Python (python3) met de -m optie aan te roepen is het volgende argument de module die uitgevoerd moet worden. Zo weet je altijd dat de juiste python-interpreter gebruikt wordt om PyPi packages te installeren.
 
 ### Installatie via PyPi
-Als PyPi aanwezig is kan via [PyPi](https://pypi.org/project/TN-code) de software voor de huidge gebruiker geinstalleer worden:
+Als PyPi aanwezig is kan via [PyPi](https://pypi.org/project/TN-code) de software voor de huidige gebruiker geïnstalleerd worden:
 ```console
 python -m pip install tn_code
 ```
-Om system-wide (voor alle gebruikers te installeren:
+Om system-wide (voor alle gebruikers te installeren):
 ```console
 sudo python -m pip install tn_code
 ```
