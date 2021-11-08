@@ -167,3 +167,52 @@ def fix_axis(ax):
     """
     ax.yaxis.set_major_formatter(TNFormatter(length=PRECISION_Y))
     ax.xaxis.set_major_formatter(TNFormatter(length=PRECISION_X))
+
+
+def _get_ticks(ticks):
+    """
+    Interne functie die de ticks aanpast aan de labels.
+
+    argumenten:
+        ticks:  lijst van ticklabels, gegenereerd met:
+               ax.get_xticklabels() of ax.get_yticklabels()
+    return:
+        lijst met unieke tick-waarden.
+    """
+    values = []
+    for tick in ticks[1:-1]:
+        text = tick.get_text()
+        text = text.replace('$', '')
+        text = text.replace('{', '')
+        text = text.replace('}', '')
+        text = text.replace(r'\cdot10^', 'E')
+        text = text.replace(',', '.')
+        num = float(text)
+        if num not in values:
+            values.append(num)
+    if len(values) != len(ticks[1:-1]):
+        print('Dubbele tick-waarden tegengekomen!\nControleer het figuur...')
+    return values
+
+
+def set_ticks(ax):
+    """
+    Zet de ticks op de x- en y-as.
+    De tickwaarden worden gemaakt met behulp van de gevonden waarden
+    in de labels.
+
+    argumenten:
+        ax: matplotlib ax object
+
+    return:
+        None
+    """
+    if ax.get_xticklabels()[0].get_text() == '':
+        # no ticklabels, update layout!
+        fig = ax.get_figure()
+        fig.tight_layout()
+
+    ticks_x = _get_ticks(ax.get_xticklabels())
+    ticks_y = _get_ticks(ax.get_yticklabels())
+    ax.set_xticks(ticks_x)
+    ax.set_yticks(ticks_y)
