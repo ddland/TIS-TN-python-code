@@ -25,14 +25,22 @@ sudo apt-get install sense-hat
 sudo pip install adafruit_circuitpython-ads1x15 adafruit-circuitpython-mcp3xxx
 ```
 
+### Raspberrypi 
+De raspberrypi maakt standaard gebruik van python2. Om voor python3 (de Python versie die je voor je eigen code wilt gebruiken!) de modules te installeren moet de juiste python gebruikt worden om de modules te installeren. Het commando om bijvoorbeeld de adafruit libraries met pip te installeren wordt dan:
+```console
+sudo python3 -m pip install adafruit_circuitpython-ads1x15 adafruit-circuitpython-mcp3xxx
+```
+
+Door Python (python3) met de -m optie aan te roepen is het volgende argument de module die uitgevoerd moet worden. Zo weet je altijd dat de juiste python-interpreter gebruikt wordt om PyPi packages te installeren.
+
 ### Installatie via PyPi
 Als PyPi aanwezig is kan via [PyPi](https://pypi.org/project/TN-code) de software voor de huidge gebruiker geinstalleer worden:
 ```console
-pip install tn_code
+python -m pip install tn_code
 ```
 Om system-wide (voor alle gebruikers te installeren:
 ```console
-sudo pip install tn_code
+sudo python -m pip install tn_code
 ```
 
 Als virtual environment
@@ -40,5 +48,8 @@ Als virtual environment
 mkdir project-naam && cd project-naam
 python -m venv .env
 source .env/bin/activate
-pip install tn_code
+python -m install tn_code
 ```
+Daarna moet, om gebruik te maken van het virtuele environment, bij het opstarten het environmet geactiveerd worden
+
+
