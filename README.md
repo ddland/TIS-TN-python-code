@@ -52,4 +52,9 @@ python -m install tn_code
 ```
 Daarna moet, om gebruik te maken van het virtuele environment, bij het opstarten het environmet geactiveerd worden
 
+### Upgrade via PyPi
+Om het package TN-code te updaten moet de ```--upgrade``` optie toegevoed worden aan het pip installatie commando:
+```console
+sudo python -m pip install --upgrade tn_code
+```
 
