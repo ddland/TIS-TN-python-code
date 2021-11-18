@@ -42,7 +42,10 @@ plt.plot(range(len(mag)), mag)
 plt.show()
 ```
 ### output
-![afbeelding van functie en fourier-transformatie](https://github.com/ddland/TIS-TN-python-code/tree/master/voorbeelden/fourier/fourier_visueel.png?raw=true)
-![afbeelding van fase en magnitude van de fourier-transformatie](https://github.com/ddland/TIS-TN-python-code/tree/master/voorbeelden/fourier/fourier_fase_magnitude.png?raw=true)
+Afbeelding van functie en fourier-transformatie:
+![afbeelding van functie en fourier-transformatie](/voorbeelden/fourier/fourier_visueel.png)
+
+Afbeelding van fase en magnitude van de fourier-transformatie:
+![afbeelding van fase en magnitude van de fourier-transformatie](/voorbeelden/fourier/fourier_fase_magnitude.png)
 
 
