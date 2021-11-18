@@ -1,4 +1,4 @@
- # TIS-TN-python-code
+# TIS-TN-python-code
 
 Hier staat de source code van de scripts die door de docenten van TN voor gebruik tijdens de studie gemaakt zijn.
 
