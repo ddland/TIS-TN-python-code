@@ -110,7 +110,7 @@ class TNFormatter(mticker.Formatter):
         return self.__call__(x, pos)
 
 
-def label_x(grootheid, eenheid, ax, haak='[]', text=''):
+def label_x(grootheid, eenheid, ax, haak='[]', text='', fontsize=10):
     """
     Zet label van de as op een (relatief) makkelijke manier.
 
@@ -120,14 +120,16 @@ def label_x(grootheid, eenheid, ax, haak='[]', text=''):
         ax: matplotlib ax object waarin de x-as zicht bevindt.
         haak: standaard [], anders string met linker haak, rechter haak.
         text: eventuele tekst die voor de grootheid weergegeven moet worden.
+        fontsize: eventuele fontsize voor de label-tekst, default 10pt.
     return:
         none
     """
     ax.xaxis.set_label_text(r'%s $\,%s \, %s\mathrm{%s}%s$' % (text,
-                            grootheid, haak[0], eenheid, haak[1]))
+                            grootheid, haak[0], eenheid, haak[1]),
+                            fontsize=fontsize)
 
 
-def label_y(grootheid, eenheid, ax, haak='[]', text=''):
+def label_y(grootheid, eenheid, ax, haak='[]', text='', fontsize=10):
     """
     Zet label van de as op een (relatief) makkelijke manier.
 
@@ -137,11 +139,13 @@ def label_y(grootheid, eenheid, ax, haak='[]', text=''):
         ax: matplotlib ax object waarin de x-as zicht bevindt.
         haak: standaard [], anders string met linker haak, rechter haak.
         text: eventuele tekst die voor de grootheid weergegeven moet worden.
+        fontsize: eventuele fontsize voor de label-tekst, default 10pt.
     return:
         none
     """
     ax.yaxis.set_label_text(r'%s $\,%s \, %s\mathrm{%s}%s$' % (text,
-                            grootheid, haak[0], eenheid, haak[1]))
+                            grootheid, haak[0], eenheid, haak[1]),
+                            fontsize=fontsize)
 
 
 # Backwards compatiblity (fix_axis functie aanroep)
