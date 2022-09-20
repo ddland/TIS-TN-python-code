@@ -8,12 +8,11 @@ try:
     import piplates.DAQCplate as DAQC
 except ImportError:
     print("Failed to import piplates-DAQCplate from python system path")
-    raise ImportError(
-        "Failed to import library from parent folder")
+    raise ImportError("Failed to import library from parent folder")
 
 
 # ----- Afstandsmeting
-'''
+"""
 Extra hardware:
     HC-SR04
 Aansluitschema:
@@ -24,7 +23,7 @@ Aansluitschema:
 
 Zie voor details:
     https://pi-plates.com/daqc-users-guide/#Distance_Measurement_with_the_HC-SR04
-'''
+"""
 
 # ----- werkt alleen als de hardware is aangesloten
 # distance = DAQC.getRANGE(0,0,'c') # geeft afstand in cm
@@ -43,5 +42,5 @@ print(val8)
 data = get_data.readPiPlate(DAQC, [0, 1, 2])
 
 # maak een (unieke) filenaam aan
-filename = 'meting_test1_%s.txt' % (int(time.time()))
+filename = "meting_test1_%s.txt" % (int(time.time()))
 write_data.saveArray(data, filename)

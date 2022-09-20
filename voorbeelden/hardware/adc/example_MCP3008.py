@@ -12,11 +12,10 @@ try:
     from adafruit_mcp3xxx.analog_in import AnalogIn
 except ImportError:
     print("Failed to import piplates-DAQCplate from python system path")
-    raise ImportError(
-        "Failed to import library from parent folder")
+    raise ImportError("Failed to import library from parent folder")
 
 # INPUT VARIABELEN
-filename = 'test'
+filename = "test"
 samples = 1000
 
 # ----- configureer de MCP
@@ -30,5 +29,5 @@ chan = AnalogIn(mcp, MCP.P0, MCP.P1)
 data = get_data.readADS(chan, samples)
 
 # maak een (unieke) filenaam aan
-file_name = filename+'.txt'
+file_name = filename + ".txt"
 write_data.saveArray(data, file_name)
