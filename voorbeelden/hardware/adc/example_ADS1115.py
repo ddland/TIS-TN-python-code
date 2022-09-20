@@ -7,6 +7,7 @@ from TN_code.hardware import write_data
 try:
     import board
     import busio
+
     i2c = busio.I2C(board.SCL, board.SDA)
 
     import adafruit_ads1x15.ads1115 as ADS
@@ -14,24 +15,23 @@ try:
 
 except ImportError:
     print("Failed to import piplates-DAQCplate from python system path")
-    raise ImportError(
-        "Failed to import library from parent folder")
+    raise ImportError("Failed to import library from parent folder")
 
 # INPUT VARIABELEN
 samples = 1000
 sample_rate = 250
 gain = 1
-mode = 'single'
-filename = 'test'
+mode = "single"
+filename = "test"
 
 # ----- configureer de ADC
 
 ads = ADS.ADS1115(i2c)
 
-if mode == 'cont':
+if mode == "cont":
     ads.mode = ADS.Mode.CONTINUOUS  # snel
-elif mode == 'single':
-    ads.mode = ADS.Mode.SINGLE      # langzaam
+elif mode == "single":
+    ads.mode = ADS.Mode.SINGLE  # langzaam
 
 # ----- configureer de ADC
 
@@ -46,5 +46,5 @@ chan = AnalogIn(ads, ADS.P0, ADS.P1)  # pin 0 verbonden
 data = get_data.readADS(chan, samples)
 
 # maak een (unieke) filenaam aan
-file_name = filename + '.txt'
+file_name = filename + ".txt"
 write_data.saveArray(data, file_name)

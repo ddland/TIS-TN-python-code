@@ -63,14 +63,14 @@ def readADS(channel, N=1000, t0=0):
             data[:, i] = (time.time() - t0, channel.voltage)
     else:
         channels = len(channel)
-        data = np.zeros((channels+1, N))
+        data = np.zeros((channels + 1, N))
         samples = np.zeros(channels)
         if t0 == 0:
             t0 = time.time()
         for i in range(N):
             for sample in range(channels):
                 samples[sample] = channel[sample].voltage
-            data[:, i] = time.time()-t0, *samples
+            data[:, i] = time.time() - t0, *samples
     return data
 
 
@@ -98,14 +98,14 @@ def readADCpi(adc, channel, N=1000, t0=0):
             data[:, i] = (time.time() - t0, adc.read_voltage(channel))
     else:
         channels = len(channel)
-        data = np.zeros((channels+1, N))
+        data = np.zeros((channels + 1, N))
         samples = np.zeros(channels)
         if t0 == 0:
             t0 = time.time()
         for i in range(N):
             for sample in range(channels):
                 samples[sample] = adc.read_voltage(channel[sample])
-            data[:, i] = time.time()-t0, *samples
+            data[:, i] = time.time() - t0, *samples
     return data
 
 
@@ -134,18 +134,18 @@ def readPiPlate(plate, channel, N=1000, t0=0, ADC=0):
             data[:, i] = (time.time() - t0, plate.getADC(ADC, channel))
     else:
         channels = len(channel)
-        data = np.zeros((channels+1, N))
+        data = np.zeros((channels + 1, N))
         samples = np.zeros(channels)
         if t0 == 0:
             t0 = time.time()
         for i in range(N):
             for sample in range(channels):
                 samples[sample] = plate.getADC(ADC, channel[sample])
-            data[:, i] = time.time()-t0, *samples
+            data[:, i] = time.time() - t0, *samples
     return data
 
 
-def readArduino(ser, N=1000, t0=0, Ndata=1, seperator=';'):
+def readArduino(ser, N=1000, t0=0, Ndata=1, seperator=";"):
     """
     Lees de arduino voor N datapunten uit.
 
@@ -162,15 +162,17 @@ def readArduino(ser, N=1000, t0=0, Ndata=1, seperator=';'):
         data: 2d of n-d numpy array met N data- en tijd samples.
     """
 
-    data = np.zeros((Ndata+1, N))
+    data = np.zeros((Ndata + 1, N))
     if Ndata == 1:
         if t0 == 0:
             t0 = time.time()
         for i in range(N):
-            try:    # mocht de data niet (goed) aankomen
-                    # ga dan verder met het volgende datapunt
-                data[:, i] = (time.time() - t0,
-                              float(ser.readline().decode().strip('\r\n')))
+            try:  # mocht de data niet (goed) aankomen
+                # ga dan verder met het volgende datapunt
+                data[:, i] = (
+                    time.time() - t0,
+                    float(ser.readline().decode().strip("\r\n")),
+                )
             except Exception:
                 pass
     else:
@@ -178,9 +180,9 @@ def readArduino(ser, N=1000, t0=0, Ndata=1, seperator=';'):
         if t0 == 0:
             t0 = time.time()
         for i in range(N):
-            try:    # mocht de data niet (goed) aankomen
-                    # ga dan verder met het volgende datapunt
-                ardata = ser.readline().decode().strip('\r\n')
+            try:  # mocht de data niet (goed) aankomen
+                # ga dan verder met het volgende datapunt
+                ardata = ser.readline().decode().strip("\r\n")
                 ardata = ardata.split(seperator)
                 ardata = [float(i) for i in ardata]
                 data[:, i] = (time.time() - t0, *ardata)
