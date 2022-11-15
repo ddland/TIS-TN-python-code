@@ -3,7 +3,7 @@ import serial
 from TN_code.hardware import get_data
 from TN_code.hardware import write_data
 
-ser = serial.Serial('/dev/ttyACM0', 9600)  # arduino
+ser = serial.Serial("/dev/ttyACM0", 9600)  # arduino
 
 """
 AnalogReadSerial.ino -> 1 datapunt

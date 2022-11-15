@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import matplotlib.ticker as mticker
+
 """
 (c) 2018, D.D.Land <d.d.land@hhs.nl>
 
@@ -51,51 +52,51 @@ class TNFormatter(mticker.Formatter):
         Herschrijft de getallen op de assen naar getallen met een vast aantal
         digits.
         """
-        s = '%.10e' % x
-        tup = s.split('e')
-        signif = tup[0].rstrip('.')
-        neg = ''
-        if signif[0] == '-':
-            neg = '-'
+        s = "%.10e" % x
+        tup = s.split("e")
+        signif = tup[0].rstrip(".")
+        neg = ""
+        if signif[0] == "-":
+            neg = "-"
             signif = signif[1:]
-        sign = tup[1][0].replace('+', '')  # verwijder +
-        expo = tup[1][1:].lstrip('0')
+        sign = tup[1][0].replace("+", "")  # verwijder +
+        expo = tup[1][1:].lstrip("0")
         if expo:  # getal groter dan 10
             if self.length <= abs(int(expo)):  # schrijf als 10 macht
-                expon = '10^{%s%s}' % (sign, expo)
+                expon = "10^{%s%s}" % (sign, expo)
                 if self.length == 1:  # allen getal voor de . houden...
-                    splt = signif.split('.')
+                    splt = signif.split(".")
                     signif = splt[0]
                 else:  # meer dan 1 cijfer significant
-                    signif = signif[:self.length+1]
-                    if len(signif) < self.length+1:
-                        signif += '0' * (self.length + 1 - len(signif))
-                s = r'%s%s{\cdot}%s' % (neg, signif, expon)
+                    signif = signif[: self.length + 1]
+                    if len(signif) < self.length + 1:
+                        signif += "0" * (self.length + 1 - len(signif))
+                s = r"%s%s{\cdot}%s" % (neg, signif, expon)
             else:  # schrijf als getal
-                s = '%.10f' % x
+                s = "%.10f" % x
                 extra0 = 0
-                if s[0] == '-':
+                if s[0] == "-":
                     s = s[1:]
-                if s[0] == '0':  # kleiner dan 1
-                    splt = s.split('.')
-                    zeros = splt[1].lstrip('0')
+                if s[0] == "0":  # kleiner dan 1
+                    splt = s.split(".")
+                    zeros = splt[1].lstrip("0")
                     num = len(splt[1]) - len(zeros)
-                    s = r'%s%s%s' % (neg, s[:self.length+2], '0'*num)
+                    s = r"%s%s%s" % (neg, s[: self.length + 2], "0" * num)
                 else:
-                    s = r'%s%s' % (neg, s[:self.length+1])
+                    s = r"%s%s" % (neg, s[: self.length + 1])
         else:  # exponent is 0
             if len(signif) >= self.length:
                 if self.length == 1:
-                    s = r'%s%s' % (neg, signif[:self.length])
+                    s = r"%s%s" % (neg, signif[: self.length])
                 else:
-                    s = r'%s%s' % (neg, signif[:self.length+1])
+                    s = r"%s%s" % (neg, signif[: self.length + 1])
             else:
-                s = r'%s%s%s' % (neg, signif, '0'*(self.length-len(signif)))
-        if s[-1] == '.':  # laatste teken een ., mag dus weg.
+                s = r"%s%s%s" % (neg, signif, "0" * (self.length - len(signif)))
+        if s[-1] == ".":  # laatste teken een ., mag dus weg.
             s = s[:-1]
         # vervang punten door komma's.
         # Extra witruimte rond komma met {} uit string weggehaald.
-        return "${}$".format(s.replace('.', '{,}'))
+        return "${}$".format(s.replace(".", "{,}"))
 
     def legenda(self, x, pos=None):
         """
@@ -186,16 +187,16 @@ def _get_ticks(ticks):
     values = []
     for tick in ticks[1:-1]:
         text = tick.get_text()
-        text = text.replace('$', '')
-        text = text.replace('{', '')
-        text = text.replace('}', '')
-        text = text.replace(r'\cdot10^', 'E')
-        text = text.replace(',', '.')
+        text = text.replace("$", "")
+        text = text.replace("{", "")
+        text = text.replace("}", "")
+        text = text.replace(r"\cdot10^", "E")
+        text = text.replace(",", ".")
         num = float(text)
         if num not in values:
             values.append(num)
     if len(values) != len(ticks[1:-1]):
-        print('Dubbele tick-waarden tegengekomen!\nControleer het figuur...')
+        print("Dubbele tick-waarden tegengekomen!\nControleer het figuur...")
     return values
 
 
@@ -211,7 +212,7 @@ def set_ticks(ax):
     return:
         None
     """
-    if ax.get_xticklabels()[0].get_text() == '':
+    if ax.get_xticklabels()[0].get_text() == "":
         # no ticklabels, update layout!
         fig = ax.get_figure()
         fig.tight_layout()

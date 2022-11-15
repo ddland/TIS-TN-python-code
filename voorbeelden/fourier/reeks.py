@@ -1,4 +1,4 @@
-import fourier_coeff as fc
+from TN_code import  fourier_coeff as fc
 from sympy.plotting import plot
 from sympy import Symbol
 from matplotlib import pyplot as plt
