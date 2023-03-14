@@ -8,6 +8,8 @@ Een minimaal voorbeeld is hieronder gegeven:
 ```python
 import matplotlib.pyplot as plt
 import TISTNplot as TN
+# Wanneer TN_code is geïnstalleerd kan ook gebruik gemaakt worden van:
+# from TN_code import TISTNplot as TN
 
 formatterX = TN.TNFormatter(3) # zet de x-as op 3 cijfers significant
 formatterY = TN.TNFormatter(2) # zet de y-as op 2 cijfers significant
